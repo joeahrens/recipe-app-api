@@ -13,15 +13,15 @@ RECIPES_URL = reverse('recipe:recipe-list')
 
 
 def sample_recipe(user, **params):
-      """ Create and return a sample recipe """
-      defaults = {
+    """ Create and return a sample recipe """
+    defaults = {
         'title': 'Sample recipe',
         'time_minutes': 10,
         'price': '5.00'
-      }
-      defaults.update(params)
+    }
+    defaults.update(params)
 
-      return Recipe.objects.create(user=user, **defaults)
+    return Recipe.objects.create(user=user, **defaults)
 
 
 class PublicRecipeApiTests(TestCase):
@@ -63,13 +63,13 @@ class PrivateRecipeAPITests(TestCase):
     def test_recipes_limited_to_user(self):
         """ Retrieving recipes for user """
         user2 = get_user_model().objects.create_user(
-            'test@somedomain.com',
+            'test2@somedomain.com',
             'testpass'
         )
         sample_recipe(user=user2)
         sample_recipe(user=self.user)
 
-        res = self.cient.get(RECIPES_URL)
+        res = self.client.get(RECIPES_URL)
 
         recipes = Recipe.objects.filter(user=self.user)
         serializer = RecipeSerializer(recipes, many=True)
