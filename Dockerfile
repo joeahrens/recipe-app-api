@@ -1,5 +1,5 @@
 FROM python:3.7-alpine
-MAINTAINER Joe Ahrens Verizon
+MAINTAINER Joe Ahrens
 
 ENV PYTHONUNBUFFERED 1
 
